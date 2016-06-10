@@ -32,6 +32,10 @@ function civicrm_entity_actions_action_info() {
       'type' => 'civicrm_contact',
       'configurable' => TRUE,
     ),
+    'civicrm_entity_actions_relationship_disable_relationship_action' => array(
+      'label' => t('Disable Relationship'),
+      'type' => 'civicrm_relationship',
+    ),
   );
 }
 
@@ -209,4 +213,16 @@ function civicrm_entity_actions_contact_add_entity_tag_action_form( $context = a
 
 function civicrm_entity_actions_contact_add_entity_tag_action_submit($form, $form_state) {
   return array('state' => $form_state['values']['tag_id']);
+}
+
+/**
+ *
+ * @param unknown $object
+ * @param array $context
+ */
+
+function civicrm_entity_actions_relationship_disable_relationship_action(&$object, $context = array()) {
+  // NB - no need to call api directly - just set the value
+  // and an automatic entity->save() does the business
+  $object->is_active = 0;
 }
